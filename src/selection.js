@@ -11,6 +11,7 @@ define(['module', 'knockout', 'ko-grid'], function (module, ko, koGrid) {
             var evaluateRowClicks = !!(bindingValue['evaluateRowClicks'] || config['evaluateRowClicks']);
             var selectedEntriesIds = bindingValue['selectedEntriesIds'] || ko.observableArray([]);
             var selectedEntryId = bindingValue['selectedEntryId'] || ko.observable(null);
+            var cellDoubleClick = bindingValue['cellDoubleClick'];
             var allSelected = false;
 
             var column = grid.columns.add({
@@ -96,6 +97,9 @@ define(['module', 'knockout', 'ko-grid'], function (module, ko, koGrid) {
             else
                 grid.data.onCellClick('.' + SELECTION_CLASS, toggleEntrySelection);
 
+            if (cellDoubleClick)
+               grid.data.onCellDoubleClick(cellDoubleClick);
+
             grid.data.rows.installClassifier(function (row) {
                 selectedEntriesIds(); // track dependency
                 return isSelected[grid.data.observableValueSelector(ko.unwrap(row[primaryKey]))] ? ['selected'] : [];
@@ -103,6 +107,7 @@ define(['module', 'knockout', 'ko-grid'], function (module, ko, koGrid) {
 
             var stateComputer = ko.computed(() => {
                 var selectedEntryCount = selectedEntriesIds().length;
+                if (selectedEntryCount == 0) isSelected = {};
                 var filteredSize = grid.data.view.filteredSize();
 
                 selectedEntryId(selectedEntryCount ? selectedEntriesIds()[selectedEntryCount - 1] : null);
