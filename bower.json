@@ -2,7 +2,7 @@
   "name": "ko-grid-selection",
   "main": "dist/ko-grid-selection.js",
   "description": "A ko-grid extension to select rows.",
-  "authors": ["Ben Schulz (https://github.com/benschulz)"],
+  "authors": ["Eduardo Bonato (https://github.com/ebonato)"],
   "license": "BSD-3-Clause",
   "keywords": [
     "ko-grid",
@@ -10,9 +10,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "http://github.com/benschulz/ko-grid-selection.git"
+    "url": "http://github.com/ebonato/ko-grid-selection.git"
   },
   "dependencies": {
-    "ko-grid": "benschulz/ko-grid"
+    "ko-grid": "ebonato/ko-grid"
   }
 }
